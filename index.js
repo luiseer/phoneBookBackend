@@ -3,15 +3,12 @@ const app = express()
 const cors = require('cors')
 const Person = require('./models/person.js')
 const errorHandler = require('./middlewares/errorHandler.js')
-// const morgan = require('morgan')
+
 require('dotenv').config()
 app.use(express.json())
 app.use(express.static('dist'))
 app.use(cors())
-// app.use(morgan(':method :url :status :res[content-length] - :res-time ms :body'))
-// morgan.token('body', (req) => {
-//   return JSON.stringify(req.body)
-// })
+
 
 
 app.get('/api/persons', (req, res) =>{
@@ -45,47 +42,6 @@ app.delete('/api/persons/:id', (req, res, next) =>{
     })
     .catch(error => next(error))
 })
-
-// const generateId = (nmin, nmax) => Math.floor(Math.random() * (nmax - nmin) + nmin)
-
-// app.post('/api/persons', (req, res) => {
-//   const body = req.body
-
-//   if (body.content === undefined) {
-//     return res.status(400).json({error: 'content missing'})
-//   }
-
-//   const number = new Number({
-//     name: body.name,
-//     number: body.number
-//   })
-
-//   person.save().then(saveNumber => {
-//     res.json(saveNumber)
-//   })
-
-  // if (!body.name || !body.number) {
-  //   return res.status(400).json({
-  //     error: 'Number or name is missing'
-  //   })
-  // }
-  // const personExists = persons.find(p => p.name === body.name)
-
-  // if (personExists) {
-  //   return res.status(400).json({
-  //     error: 'the person is already exits'
-  //   })
-  // }
-
-  // const newPerson = {
-  //   name: body.name,
-  //   number: body.number,
-  //   id: generateId(5, 500)
-  // }
-  // persons = persons.concat(newPerson)
-
-  // res.status(201).json(newPerson)
-// })
 
 app.put('/api/persons/:id', (req, res, next) => {
   const body = req.body
